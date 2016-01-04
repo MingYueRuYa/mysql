@@ -1,3 +1,8 @@
+将msyql bin目录下的程序加入到PATH中
+vim /etc/profile.d/mysql.sh
+	export PAHT=$PATH:/usr/local/mysql/bin
+
+
 然mysql的每个表单独存储为一个文件 InnoDB存储引擎， InnoDB_per_table = 1
 # SHOW VARIBALE InnoDB LIKE "%InnoDB"
 
@@ -25,6 +30,32 @@ purge binary logs to 'mysql-bin.000015';
 |	 # mysqlbinlog mysql-bin.000000x > tmp.sql
 |	 # msyql < tmp.sql
 | # mysqlbinlog mysql-bin.000000x > mysql (直接重定向，不需要在生成sql文件)
+read binary log from specify postion.
+| # mysqlbinlog --start-position=xxxx mysql-bin.xxxxx > tmp.sql
+
+查看当前的二进制日志
+show master status;
+查看二进制的events
+show binlog events in 'file_name'
+关闭二进制日志，修改当前会话的变量，会立马生效的
+set sql_log_bin=0
+
+
+查看所有的变量
+show global variables
+查看bin的变量
+show global variables like '%bin%'
+
+######################################################################################################
+# 在进行数据库还原的时候，不需要进行二进制日志记录，所以要先临时关闭                                 #
+# mysql>set sql_bin_log = 0                                                                          #
+# mysql>\. 执行sql语句                                                                               #
+######################################################################################################
+
+模仿原有的一张表，只复制表的结构，没有数据
+# mysql>create table like tb_name;
+
+
 
 
 

@@ -40,6 +40,7 @@ show binlog events in 'file_name'
 关闭二进制日志，修改当前会话的变量，会立马生效的
 set sql_log_bin=0
 
+# mysql> flush tables with read lock //锁住表，只允许读操作
 
 查看所有的变量
 show global variables
